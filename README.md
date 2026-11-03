@@ -1,1 +1,1 @@
-# pdf-qa-rag-assistant-
+# chat-with-pdf-rag
