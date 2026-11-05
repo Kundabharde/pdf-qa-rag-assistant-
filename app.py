@@ -55,7 +55,11 @@ def answer_question(vectorstore, question):
     prompt += "Answer:"
 
     llm = ChatGoogleGenerativeAI(model=CHAT_MODEL, temperature=0)
-    return llm.invoke(prompt).content, docs
+      
+    response = llm.invoke(prompt).content
+    if isinstance(response, list):
+        response = "".join(p.get("text", "") if isinstance(p, dict) else str(p) for p in response)
+    return response, docs
 
 
 uploaded_file = st.file_uploader("Upload a PDF", type="pdf")
